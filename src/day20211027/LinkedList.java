@@ -125,6 +125,7 @@ public class LinkedList<E> {
         if(first==null){
             s+="]";
             return s;
+
         }
         ListNode<E> cur=first;
         while(cur.next!=null){
