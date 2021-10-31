@@ -20,6 +20,7 @@ public class TestQueue {
         q.poll();
         q.poll();
 
+
         System.out.println(q.size());
         System.out.println(q.peek());
 
