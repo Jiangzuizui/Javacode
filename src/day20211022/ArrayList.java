@@ -13,7 +13,7 @@ public class ArrayList<E>{
         if(initCapacity<=0){
             initCapacity=DEFAULT_CAPACITY;
         }
-        elementData=(E[]) new Object[initCapacity]
+        elementData=(E[]) new Object[initCapacity];
     }
 
     public boolean add(E e){
@@ -27,7 +27,7 @@ public class ArrayList<E>{
     //在任意位置插入
     public void add(int index,E e){
         if(index<0||index>size){
-            throw new ArrayIndexOutOfBoundsException("add:index越界")
+            throw new ArrayIndexOutOfBoundsException("add:index越界");
         }
         //ensureCapacity();
         for (int i = size-1;i>=index;i--) {

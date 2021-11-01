@@ -2,8 +2,10 @@ package day20211011;
 
 public class Test {
     public static void main(String[] args){
-        int a=0xABCDEF;
-        System.out.printf("%15d",a);
+        //int a=0xABCDEF;
+        //System.out.printf("%15d",a);
+        System.out.println(100%3);
+        System.out.println(100%3.0);
     }
 
     public static void main3(String[] args){

@@ -3,6 +3,7 @@ package day20211029;
 import java.util.Stack;
 
 public class TestStack {
+
     public static void main(String[] args) {
         Stack<Integer> s=new Stack<>();
         //入栈
