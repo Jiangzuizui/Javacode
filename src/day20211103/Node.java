@@ -32,6 +32,7 @@ public class Node {
             System.out.println(cur.val);
         }
 
+
         //2.遍历链表,找到最后一个结点
         while(cur!=null && cur.next!=null){
             cur=cur.next;
