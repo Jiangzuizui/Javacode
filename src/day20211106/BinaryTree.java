@@ -194,6 +194,45 @@ public class BinaryTree {
         return find(root,data);
     }
 
+    //判断是否为完全二叉树
+    public boolean isCompleteTree(){
+        if(root==null){
+            return true;
+        }
+        //按照层序遍历的方式找第一个不饱和的节点
+        Queue<BTNode> q=new LinkedList<>();
+        q.offer(root);
+        boolean flag=false;//用来标记不饱和节点
+        while(!q.isEmpty()){
+            BTNode cur=q.poll();
+            if(flag){
+                //从该结点往后的结点都不能有孩子
+                if(cur.left!=null||cur.right!=null){
+                    return false;
+                }
+            }else{
+                if(cur.left!=null&&cur.right!=null){
+                    //左右孩子都存在
+                    q.offer(cur.left);
+                    q.offer(cur.right);
+                }else if(cur.left!=null){
+                    //cur只有左孩子无右孩子
+                    q.offer(cur.left);
+                    flag=true;
+                }else if(cur.right!=null){
+                    //cur只有右孩子
+                    return false;
+                }else{
+                    //cur是一个叶子结点
+                    flag=true;
+                }
+            }
+
+        }
+        return true;
+    }
+
+
     public static void main(String[] args) {
         BinaryTree bt=new BinaryTree();
         bt.creatBinaryTree();
@@ -216,5 +255,10 @@ public class BinaryTree {
 
         bt.levelOrder();
 
+        if(bt.isCompleteTree()){
+            System.out.println("是完全二叉树");
+        }else{
+            System.out.println("不是完全二叉树");
+        }
     }
 }
