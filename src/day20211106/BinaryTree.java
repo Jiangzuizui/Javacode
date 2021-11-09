@@ -35,6 +35,34 @@ public class BinaryTree {
 
         root=node1;
     }
+
+    int index=0;
+    public void creatBinaryTree2(int[] array) {
+        index = 0;
+        root = creatBinaryTree2N(array);
+    }
+
+    //用数组创建一个二叉树
+    private BTNode creatBinaryTree2N(int[] array){
+        BTNode treeRoot=null;
+        if(index<array.length&&array[index]!=-1){
+            //先创建根节点
+            treeRoot=new BTNode(array[index]);
+
+            //递归创建根的左子树
+            ++index;
+            treeRoot.left=creatBinaryTree2N(array);
+
+            //递归创建根的右子树
+            ++index;
+            treeRoot.right=creatBinaryTree2N(array);
+        }
+        return treeRoot;
+    }
+
+
+
+
     int count=0;
 
     //层序遍历
@@ -235,7 +263,10 @@ public class BinaryTree {
 
     public static void main(String[] args) {
         BinaryTree bt=new BinaryTree();
-        bt.creatBinaryTree();
+        //bt.creatBinaryTree();
+
+        int[] arr={1,2,3,-1,-1,-1,4,5,-1,-1,6,-1,-1};
+        bt.creatBinaryTree2(arr);
 
         bt.preOrder();
         bt.midOrder();
