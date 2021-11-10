@@ -36,11 +36,13 @@ public class BinaryTree {
         root=node1;
     }
 
+
     int index=0;
     public void creatBinaryTree2(int[] array) {
         index = 0;
         root = creatBinaryTree2N(array);
     }
+
 
     //用数组创建一个二叉树
     private BTNode creatBinaryTree2N(int[] array){
