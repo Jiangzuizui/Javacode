@@ -1,8 +1,29 @@
 package day20211030;
 
+import day20211023.SingleLinkList;
+import day20211103.Node;
+
 import java.util.Stack;
+import java.util.List;
 
 public class Solution2 {
+    public boolean isPalindrome1(Node head){
+        Node cur = head;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null){
+            stack.push(cur);
+            cur = cur.next;
+        }
+        while (head != null){
+            if (head.val != stack.pop().val){
+                return false;
+            }
+            head = head.next;
+        }
+        return true;
+    }
+
+
     public boolean isValid(String s){
         Stack<Character> st=new Stack<>();
         for(int i=0;i<s.length();i++){

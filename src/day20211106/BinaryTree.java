@@ -38,31 +38,29 @@ public class BinaryTree {
 
 
     int index=0;
-    public void creatBinaryTree2(int[] array) {
+    public void creatBinaryTree2(int[] array,int invalid) {
         index = 0;
-        root = creatBinaryTree2N(array);
+        root = creatBinaryTree2N(array,invalid);
     }
 
 
     //用数组创建一个二叉树
-    private BTNode creatBinaryTree2N(int[] array){
+    private BTNode creatBinaryTree2N(int[] array,int invalid){
         BTNode treeRoot=null;
-        if(index<array.length&&array[index]!=-1){
+        if(index<array.length && array[index]!=invalid){
             //先创建根节点
             treeRoot=new BTNode(array[index]);
 
             //递归创建根的左子树
             ++index;
-            treeRoot.left=creatBinaryTree2N(array);
+            treeRoot.left=creatBinaryTree2N(array,invalid);
 
             //递归创建根的右子树
             ++index;
-            treeRoot.right=creatBinaryTree2N(array);
+            treeRoot.right=creatBinaryTree2N(array,invalid);
         }
         return treeRoot;
     }
-
-
 
 
     int count=0;
@@ -268,7 +266,7 @@ public class BinaryTree {
         //bt.creatBinaryTree();
 
         int[] arr={1,2,3,-1,-1,-1,4,5,-1,-1,6,-1,-1};
-        bt.creatBinaryTree2(arr);
+        bt.creatBinaryTree2(arr,-1);
 
         bt.preOrder();
         bt.midOrder();
