@@ -9,7 +9,7 @@ public class Sort {
         System.out.println();
     }
 
-    
+
     //插入排序
     //空间复杂度O(1)
     //时间复杂度 最优情况下接近有序O(N)
@@ -182,6 +182,9 @@ public class Sort {
     }
 
     //快速排序
+    //时间复杂度:O(N^2) 最差情况下(有序的降序改为升序)
+    //最好情况下 每次取基准值都在最中间 O(Nlog2 N)
+    //应用场景:适合比较凌乱的数据
     public static void quickSort(int[] array,int left,int right){
         //假设升序
         //找一个基准值将[left,right)区间分割成两个部分
@@ -192,14 +195,16 @@ public class Sort {
             //[left,div)
             quickSort(array,left,div);
 
-            //右侧部分比基准值大
+            //右侧部分比 基准值大
             //[div+1,right)
             quickSort(array,div+1,right);
         }
     }
 
     //分割的方法
-    public static int partition(int[] array,int left,int right){
+    //方法一：Hoare版
+    //时间复杂度:O(N)
+    public static int partition1(int[] array,int left,int right){
         int key=array[right-1];
         int begin=left;
         int end=right-1;
@@ -225,10 +230,69 @@ public class Sort {
         return begin;
     }
 
+    //分割的方法 方式二 挖坑法
+    public static int partition2(int[] array,int left,int right){
+        int key=array[right-1];
+        int begin=left;
+        int end=right-1;
+
+        while(begin<end){
+            //从begin从前往后找比基准值大的元素
+            while(begin<end && array[begin]<=key){
+                begin++;
+            }
+
+            if(begin<end){
+                //begin位置上找到了一个比key大的元素
+                //需要用begin去填end位置上的坑
+                array[end]=array[begin];
+                //begin位置上就形成了一个新的坑
+            }
+
+            //让end从后往前找比基准值小的元素
+            while(begin<end && array[end]>=key){
+                end--;
+            }
+
+            if(begin<end){
+                //end位置就找到了一个比key小的元素
+                //需要用end去填刚才begin产生的新坑
+                array[begin]=array[end];
+                //end位置又产生了一个新坑
+            }
+        }
+        //begin和end相等 他俩的位置是最后的一个坑位
+        //需要用基准值key去填这个坑位
+        array[begin]=key;
+
+        return begin;
+    }
+
+    //分割的方法 方式三:前后标记
+    public static int partition(int[] array,int left,int right){
+        int cur=left;
+        int prev=cur-1;
+        int key=array[right-1];
+
+        //让cur从前往后找比key小的元素
+        while(cur<right){
+            if(array[cur]<key && ++prev!=cur){
+                swap(array,cur,prev);
+            }
+            ++cur;
+        }
+        //将基准值的位置上放置好
+        if(++prev != right-1){
+            swap(array,prev,right-1);
+        }
+        return prev;
+    }
+
+
     public static void main(String[] args) {
         int[] array={4,2,8,6,9,1,3,5,0,7};
 
-        // insertSort(array);
+        //insertSort(array);
         //shellSort(array);
         //selectSort(array);
         //selectSortOP(array);
