@@ -1,6 +1,4 @@
-package day20211121;
+package day20211122;
 
 public class Animal {
-    String name;
-    String gender;
 }
