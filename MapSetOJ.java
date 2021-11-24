@@ -56,6 +56,37 @@ public class MapSetOJ {
         return newHead;
     }*/
 
+
+
+    public List<String> topKFrequent(String[] words,int k){
+        //1.统计每个单词出现的次数
+        Map<String,Integer> m=new HashMap<>();
+        for (int i = 0; i <words.length ; i++) {
+            m.put(words[i],m.getOrDefault(words[i],0)+1);
+        }
+        //2.找Top-k 出现次数最多的前k个单词
+        //a.用前k个单词建一个小堆
+        PriorityQueue<Map.Entry<String,Integer>> p=new PriorityQueue<>(new Less());
+        Set<Map.Entry<String,Integer>> s=m.entrySet();
+        int i=0;
+        for (Map.Entry<String,Integer> kv:s){
+            if(i<k){
+                p.offer(kv);
+                i++;
+            }else{
+                if(kv.getValue()>=p.peek().getValue()){
+                    p.poll();
+                    p.offer(kv);
+                }
+            }
+        }
+        List<String> list=new ArrayList<>(k);
+        for (int j = 0; j < k; j++) {
+            list.add(p.poll().getKey());
+        }
+        return list;
+    }
+
     //石头中宝石的个数
     public int numJewelsInStones(String jewels,String stones){
         //1.统计每个石头出现的次数
@@ -72,5 +103,27 @@ public class MapSetOJ {
         }
         return count;
     }
+
+    public static void main(String[] args) {
+        //看键盘上那几个键坏了
+        Scanner sc=new Scanner(System.in);
+        while(sc.hasNext()){
+            String in=sc.nextLine().toUpperCase();
+            String out=sc.nextLine().toUpperCase();
+
+            Set<Character> s=new HashSet<>();
+            for(int i=0;i<out.length();i++){
+                s.add(out.charAt(i));
+            }
+            for (int i = 0; i <in.length() ; i++) {
+                if(s.add(in.charAt(i))){
+                    //如果能插入,就是坏键
+                    System.out.print(in.charAt(i));
+                }
+            }
+            System.out.println();
+        }
+    }
+
 
 }
