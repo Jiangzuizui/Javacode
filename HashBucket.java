@@ -42,6 +42,7 @@ public class HashBucket {
             cur=cur.next;
         }
 
+        
         //2.将元素插入到bucketNo桶中
         ListNode newNode=new ListNode(key,value);
         newNode.next=table[bucketNo];
