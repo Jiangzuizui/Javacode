@@ -24,6 +24,7 @@ public class HashBucket {
 
     //O(1)
     public Integer put(Integer key,Integer value){
+
         //0.是否需要扩容
         checkCapacity();
 
